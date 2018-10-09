@@ -10,7 +10,13 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require rails-ujs
+//= require jquery.min
 //= require activestorage
 //= require turbolinks
+//= require_tree ./maps
 //= require_tree .
+
+
+App.room = App.cable.subscriptions.create "WebNotificationsChannel",
+  received: (data) ->
+    $('#messages').append data['message']
