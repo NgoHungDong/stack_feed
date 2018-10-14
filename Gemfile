@@ -60,3 +60,4 @@ gem "ancestry"
 gem 'redis'
 gem 'redis-rails'
 gem 'redis-objects'
+gem 'jquery-rails'

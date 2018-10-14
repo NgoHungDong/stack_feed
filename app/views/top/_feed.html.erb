@@ -1,0 +1,33 @@
+<%= link_to save_history_path(feed_id: feed.id), remote: true, class: 'list-group-item list-group-item-action', id: feed.id, data: { toggle: 'modal', target: "#modal_#{feed.id}" } do %>
+  <div class="media d-flex align-items-center">
+    <% unless feed_seen?(feed.id) %>
+      <img alt="Image placeholder" src="./assets/img/icons/dusk/svg/browser-window.svg" class="img-saturate" style="width: 50px;">
+    <% end %>
+    <div class="media-body ml-3">
+      <h6 class="mb-1"><%= feed.title %></h6>
+      <h7 class="text-muted"><%= time_ago_in_words(feed.published) %></h6>
+      <p class="mb-0"><%= strip_tags(feed.summary[0..200]) %></p>
+    </div>
+  </div>
+<% end %>
+
+<!-- Modal -->
+<div class="modal modal-fluid fade" id="modal_<%= feed.id %>" tabindex="-1" role="dialog" aria-labelledby="modal_<%= feed.id %>" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="row justify-content-center">
+          <div class="col-lg-12 py-4">
+            <h4 class="heading h3"><%= feed.title %></h4>
+            <p class="lead text-muted">
+              <%= feed.summary.try(:html_safe) %>
+            </p>
+            <div class="py-md">
+            </div>
+            <a href="<%= feed.link %>" class="btn btn-primary">Let's do this!</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
